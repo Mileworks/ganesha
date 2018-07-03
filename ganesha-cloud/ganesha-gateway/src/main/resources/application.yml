@@ -12,16 +12,21 @@ zuul:
     api-a:
       path: /api-a/**
       serviceId: asset-app
+  host:
+    max-per-route-connections: 2000
+    max-total-connections: 20000
+    socket-timeout-millis: 60000
+    connect-timeout-millis: 25000
+  semaphore:
+    max-semaphores: 3000
 hystrix:
   command:
     default:
       execution:
-        timeout:
-          enabled: false
         isolation:
           thread:
-            interruptOnTimeout: false
-    fallback:
-      enabled: false
-    circuitBreaker:
-      enabled: false
+            timeoutInMilliseconds: 60000
+ribbon:
+  ConnectTimeout: 10000
+  ReadTimeout: 60000
+
