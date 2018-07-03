@@ -8,10 +8,10 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     filters: stat
-    maxActive: 1000
+    maxActive: 20
     initialSize: 1
     maxWait: 60000
-    minIdle: 500
+    minIdle: 1
     timeBetweenEvictionRunsMillis: 60000
     minEvictableIdleTimeMillis: 300000
     testWhileIdle: true
