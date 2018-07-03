@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: asset-app
+  datasource:
+    url: jdbc:mysql://localhost:3306/PICC_EBSS?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: stat
+    maxActive: 1000
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 500
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+#服务端口
+server:
+  port: 8100
+#注册中心
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka
+#mybatis
+mybatis:
+  type-aliases-package: cn.com.epicc.ganesha.asset.model
+  configuration:
+    map-underscore-to-camel-case: false
+    default-fetch-size: 100
+    default-statement-timeout: 3000
+  mapper-locations: classpath:cn/com/epicc/ganesha/asset/dao/*.xml
+#druid 监控中心配置属性
+druid:
+  monitor:
+    pattern: /druid/*
+    username: admin
+    password: admin
+    allow: 127.0.0.1,192.168.0.1
+    deny: 192.168.1.73
+    resetEnable: false
+  filter:
+    pattern: /*
+    exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
