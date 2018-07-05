@@ -1,4 +1,4 @@
-# flypig-druid
+# ganesha-druid
     数据库连接池
 
 #### 代码结结构

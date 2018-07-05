@@ -16,6 +16,7 @@
         <module>ganesha-common</module>
         <module>ganesha-redis</module>
         <module>ganesha-druid</module>
+        <module>ganesha-swagger</module>
     </modules>
 
     <packaging>pom</packaging>
