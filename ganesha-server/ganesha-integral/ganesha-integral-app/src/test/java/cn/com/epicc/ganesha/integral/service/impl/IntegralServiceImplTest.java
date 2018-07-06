@@ -1,5 +1,6 @@
 package cn.com.epicc.ganesha.integral.service.impl;
 
+import cn.com.epicc.ganesha.integral.config.IntegralError;
 import cn.com.epicc.ganesha.integral.service.IIntegralService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -30,12 +31,34 @@ public class IntegralServiceImplTest {
     public void add() throws Exception {
         boolean flag_1 = integralService.add("111",10L);
         Assert.assertTrue(flag_1);
-        boolean flag_2 = integralService.add("222",10L);
+        boolean flag_2 = integralService.add("333",10L);
         Assert.assertFalse(flag_2);
-        boolean flag_3 = integralService.add(null,10L);
-        Assert.assertFalse(flag_3);
-        boolean flag_4 = integralService.add("111",0L);
-        Assert.assertFalse(flag_4);
+        try {
+            integralService.add(null, 10L);
+        }catch (Exception e){
+            Assert.assertEquals(IntegralError.ACCOUNT_ID_ERROR.getMsg(),e.getMessage());
+        }
+        try {
+            integralService.add("111", 0L);
+        }catch (Exception e){
+            Assert.assertEquals(IntegralError.INTEGRAL_VALUE_ERROR.getMsg(),e.getMessage());
+        }
+    }
+
+    @Test
+    public void sub() throws Exception {
+        boolean flag_1 = integralService.sub("111",10L);
+        Assert.assertTrue(flag_1);
+    }
+
+    @Test
+    public void trans() throws Exception {
+
+    }
+
+    @Test
+    public void getBalance() throws Exception {
+
     }
 
 }

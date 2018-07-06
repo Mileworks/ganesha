@@ -17,15 +17,15 @@ public class ResultCode {
     /**
      * 状态码
      */
-    private String code;
+    private String status;
 
     /**
      * 状态信息
      */
     private String msg;
 
-    public ResultCode(String code, String msg) {
-        this.code = code;
+    public ResultCode(String status, String msg) {
+        this.status = status;
         this.msg = msg;
     }
 

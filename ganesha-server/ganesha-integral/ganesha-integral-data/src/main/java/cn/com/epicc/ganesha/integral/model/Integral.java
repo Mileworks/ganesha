@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Data
 @Builder
-public class AccountIntegral {
+public class Integral {
 
     /**
      * ID

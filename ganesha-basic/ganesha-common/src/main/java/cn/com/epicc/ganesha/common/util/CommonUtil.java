@@ -44,4 +44,16 @@ public class CommonUtil {
         return UUID.randomUUID().toString().replace("-", "");
     }
 
+    /**
+     * 字符串转成10进制数字
+     */
+    public static Integer strToDigital(String value){
+        char[] valueArray = value.toCharArray();
+        StringBuilder builder = new StringBuilder();
+        for (char a: valueArray) {
+            builder.append((int)a);
+        }
+        return Integer.valueOf(builder.toString());
+    }
+
 }

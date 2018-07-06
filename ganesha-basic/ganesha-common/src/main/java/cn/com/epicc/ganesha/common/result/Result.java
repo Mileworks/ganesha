@@ -13,15 +13,16 @@ import java.io.Serializable;
  * Author: lishangmin
  * Created: 2018-05-21 15:41
  */
+@SuppressWarnings("deprecation")
 @Getter
 @Setter
 @JsonSerialize(include =  JsonSerialize.Inclusion.NON_NULL)
 public class Result<T> implements Serializable {
 
     /**
-     * 代码
+     * 状态
      */
-    private String code;
+    private String status;
 
     /**
      * 信息
@@ -36,14 +37,14 @@ public class Result<T> implements Serializable {
     public Result() {
     }
 
-    public Result(String code,String msg, T data) {
-        this.code = code;
+    public Result(String status,String msg, T data) {
+        this.status = status;
         this.msg = msg;
         this.data = data;
     }
 
-    public Result(String code,String msg) {
-        this.code = code;
+    public Result(String status,String msg) {
+        this.status = status;
         this.msg = msg;
     }
 
@@ -51,42 +52,42 @@ public class Result<T> implements Serializable {
      * 返回成功
      */
     public static <T> Result<T> createBySuccess(){
-        return new Result<>(ResultCode.SUCCESS.getCode(),ResultCode.SUCCESS.getMsg());
+        return new Result<>(ResultCode.SUCCESS.getStatus(),ResultCode.SUCCESS.getMsg());
     }
 
     public static <T> Result<T> createBySuccessWithMsg(String msg){
-        return new Result<>(ResultCode.SUCCESS.getCode(),msg);
+        return new Result<>(ResultCode.SUCCESS.getStatus(),msg);
     }
 
     public static <T> Result<T> createBySuccess(T data){
-        return new Result<>(ResultCode.SUCCESS.getCode(),ResultCode.SUCCESS.getMsg(),data);
+        return new Result<>(ResultCode.SUCCESS.getStatus(),ResultCode.SUCCESS.getMsg(),data);
     }
 
     public static <T> Result<T> createBySuccess(String msg, T data){
-        return new Result<>(ResultCode.SUCCESS.getCode(),msg,data);
+        return new Result<>(ResultCode.SUCCESS.getStatus(),msg,data);
     }
 
     /**
      * 返回失败
      */
     public static <T> Result<T> createByError(){
-        return new Result<>(ResultCode.ERROR.getCode(),ResultCode.ERROR.getMsg());
+        return new Result<>(ResultCode.ERROR.getStatus(),ResultCode.ERROR.getMsg());
     }
 
     public static <T> Result<T> createByError(String msg){
-        return new Result<>(ResultCode.ERROR.getCode(),msg);
+        return new Result<>(ResultCode.ERROR.getStatus(),msg);
     }
 
-    public static <T> Result<T> createByError(String code, String msg){
-        return new Result<>(code,msg);
+    public static <T> Result<T> createByError(String status, String msg){
+        return new Result<>(status,msg);
     }
 
     public static <T> Result<T> createByError(ResultCode resultCode){
-        return new Result<>(resultCode.getCode(),resultCode.getMsg());
+        return new Result<>(resultCode.getStatus(),resultCode.getMsg());
     }
 
     public static <T> Result<T> createByError(ResultCode resultCode,T data){
-        return new Result<>(resultCode.getCode(),resultCode.getMsg(),data);
+        return new Result<>(resultCode.getStatus(),resultCode.getMsg(),data);
     }
 
     //JackSon Ignore For RestController
@@ -94,6 +95,6 @@ public class Result<T> implements Serializable {
     //FastJson Ignore For Normal Used
     @JSONField(serialize = false)
     public boolean isSuccess(){
-        return code.equals(ResultCode.SUCCESS.getCode());
+        return this.status.equals(ResultCode.SUCCESS.getStatus());
     }
 }

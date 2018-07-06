@@ -49,3 +49,5 @@ druid:
     exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
 logging:
   config: classpath:logback-dev.xml
+swagger:
+  show: true

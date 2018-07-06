@@ -13,7 +13,7 @@
     <packaging>jar</packaging>
 
     <dependencies>
-
+        <!-- owner -->
         <dependency>
             <groupId>cn.com.epicc</groupId>
             <artifactId>ganesha-integral-data</artifactId>

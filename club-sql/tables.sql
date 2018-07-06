@@ -49,7 +49,7 @@ CREATE TABLE `ganesha_asset_trans`(
 ) ENGINE = InnoDB AUTO_INCREMENT=1 DEFAULT CHAR SET =utf8mb4 COMMENT = '资产转账记录表';
 
 ################################## 积分相关表 ###########################################
-CREATE TABLE `ganesha_account_integral`(
+CREATE TABLE `ganesha_integral`(
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `account_id` varchar(50) NOT NULL DEFAULT '' COMMENT '账户ID',
   `balance` bigint(20) NOT NULL DEFAULT 0 COMMENT '账户余额',
@@ -57,4 +57,28 @@ CREATE TABLE `ganesha_account_integral`(
   `c_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_account_id`(`account_id`)
-) ENGINE = InnoDB AUTO_INCREMENT=1 DEFAULT CHAR SET =utf8mb4 COMMENT = '';
+) ENGINE = InnoDB AUTO_INCREMENT=1 DEFAULT CHAR SET =utf8mb4 COMMENT = '积分表';
+
+CREATE TABLE `ganesha_integral_trans_event`(
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `m_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `c_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB AUTO_INCREMENT=1 DEFAULT CHAR SET =utf8mb4 COMMENT = '积分转账事件表';
+
+CREATE TABLE `ganesha_integral_operation_event`(
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `m_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `c_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB AUTO_INCREMENT=1 DEFAULT CHAR SET =utf8mb4 COMMENT = '积分操作事件表';
+
+CREATE TABLE `ganesha_integral_freeze_event`(
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `m_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `c_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB AUTO_INCREMENT=1 DEFAULT CHAR SET =utf8mb4 COMMENT = '积分冻结事件表';
+
+
+
