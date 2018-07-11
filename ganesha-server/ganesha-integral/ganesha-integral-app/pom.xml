@@ -21,7 +21,14 @@
         </dependency>
         <dependency>
             <groupId>cn.com.epicc</groupId>
-            <artifactId>ganesha-integral-vo</artifactId>
+            <artifactId>ganesha-integral-struct</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <!-- micro service -->
+        <dependency>
+            <groupId>cn.com.epicc</groupId>
+            <artifactId>ganesha-activity-struct</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 

@@ -22,7 +22,7 @@
         </dependency>
         <dependency>
             <groupId>cn.com.epicc</groupId>
-            <artifactId>ganesha-asset-vo</artifactId>
+            <artifactId>ganesha-asset-struct</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 

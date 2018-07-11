@@ -1,7 +1,7 @@
 package cn.com.epicc.ganesha.integral.service;
 
-import cn.com.epicc.ganesha.integral.config.IntegralError;
 import cn.com.epicc.ganesha.integral.exception.IntegralException;
+import cn.com.epicc.ganesha.integral.exception.constant.IntegralError;
 import org.apache.commons.lang3.StringUtils;
 
 /**

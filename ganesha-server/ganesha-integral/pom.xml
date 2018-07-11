@@ -15,7 +15,7 @@
     <modules>
         <module>ganesha-integral-app</module>
         <module>ganesha-integral-data</module>
-        <module>ganesha-integral-vo</module>
+        <module>ganesha-integral-struct</module>
     </modules>
 
     <dependencies>
@@ -60,6 +60,10 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-hystrix</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-feign</artifactId>
         </dependency>
 
         <!-- database -->

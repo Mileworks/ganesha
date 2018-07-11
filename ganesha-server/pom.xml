@@ -16,6 +16,7 @@
         <module>ganesha-asset</module>
         <module>ganesha-front</module>
         <module>ganesha-integral</module>
+        <module>ganesha-activity</module>
     </modules>
 
 </project>

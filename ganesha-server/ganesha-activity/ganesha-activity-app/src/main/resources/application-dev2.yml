@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: activity-app
+  datasource:
+    url: jdbc:mysql://localhost:3306/PICC_EBSS?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+#服务端口
+server:
+  port: 8020
+#注册中心
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka
+#mybatis
+mybatis:
+  type-aliases-package: cn.com.epicc.ganesha.activity.model
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 3000
+  mapper-locations: classpath:cn/com/epicc/ganesha/activity/dao/*.xml
+#druid 监控中心配置属性
+druid:
+  monitor:
+    pattern: /druid/*
+    username: admin
+    password: admin
+    allow: 127.0.0.1,192.168.0.1
+    deny: 192.168.1.73
+    resetEnable: false
+  filter:
+    pattern: /*
+    exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+logging:
+  config: classpath:logback-dev.xml
+swagger:
+  show: true

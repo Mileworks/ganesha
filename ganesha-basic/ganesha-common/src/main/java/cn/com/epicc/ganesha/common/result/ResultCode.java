@@ -10,9 +10,9 @@ import lombok.Getter;
 @Getter
 public class ResultCode {
 
-    public static ResultCode SUCCESS = new ResultCode("000000","成功");
+    public static final ResultCode SUCCESS = new ResultCode("000000","成功");
 
-    public static ResultCode ERROR   = new ResultCode("100000","失败");
+    public static final ResultCode ERROR   = new ResultCode("100000","失败");
 
     /**
      * 状态码

@@ -51,42 +51,42 @@ public class Result<T> implements Serializable {
     /**
      * 返回成功
      */
-    public static <T> Result<T> createBySuccess(){
+    public static <T> Result<T> success(){
         return new Result<>(ResultCode.SUCCESS.getStatus(),ResultCode.SUCCESS.getMsg());
     }
 
-    public static <T> Result<T> createBySuccessWithMsg(String msg){
+    public static <T> Result<T> successWithMsg(String msg){
         return new Result<>(ResultCode.SUCCESS.getStatus(),msg);
     }
 
-    public static <T> Result<T> createBySuccess(T data){
+    public static <T> Result<T> success(T data){
         return new Result<>(ResultCode.SUCCESS.getStatus(),ResultCode.SUCCESS.getMsg(),data);
     }
 
-    public static <T> Result<T> createBySuccess(String msg, T data){
+    public static <T> Result<T> success(String msg, T data){
         return new Result<>(ResultCode.SUCCESS.getStatus(),msg,data);
     }
 
     /**
      * 返回失败
      */
-    public static <T> Result<T> createByError(){
+    public static <T> Result<T> error(){
         return new Result<>(ResultCode.ERROR.getStatus(),ResultCode.ERROR.getMsg());
     }
 
-    public static <T> Result<T> createByError(String msg){
+    public static <T> Result<T> error(String msg){
         return new Result<>(ResultCode.ERROR.getStatus(),msg);
     }
 
-    public static <T> Result<T> createByError(String status, String msg){
+    public static <T> Result<T> error(String status, String msg){
         return new Result<>(status,msg);
     }
 
-    public static <T> Result<T> createByError(ResultCode resultCode){
+    public static <T> Result<T> error(ResultCode resultCode){
         return new Result<>(resultCode.getStatus(),resultCode.getMsg());
     }
 
-    public static <T> Result<T> createByError(ResultCode resultCode,T data){
+    public static <T> Result<T> error(ResultCode resultCode,T data){
         return new Result<>(resultCode.getStatus(),resultCode.getMsg(),data);
     }
 

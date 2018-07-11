@@ -103,19 +103,19 @@ public class SMSController {
         String captchaStore = redisService.get(CaptchaKey.captchaMobile,mobile,String.class);
         redisService.delete(CaptchaKey.captchaMobile,mobile);
         if(captchaStore == null || !captcha.equals(captchaStore)){
-            return Result.createByError(APIErrorCode.CAPTCHA_ERROR);
+            return Result.error(APIErrorCode.CAPTCHA_ERROR);
         }
 
         //4. 手机号发送计数
         if (!tools.increase(MobileSendKey.counter,mobile,MOBILE_LIMIT_COUNT)){
             log.info("{} 超过发送次数:{}",mobile,MOBILE_LIMIT_COUNT);
-            return Result.createByError(APIErrorCode.OVER_SEND_ERROR);
+            return Result.error(APIErrorCode.OVER_SEND_ERROR);
         }
 
         //5. 判断发送间隔
         if (redisService.exists(MobileSendKey.gap,mobile)) {
             log.info("{} 发送频率过高",mobile);
-            return Result.createByError(APIErrorCode.AFTER_TRY_ERROR);
+            return Result.error(APIErrorCode.AFTER_TRY_ERROR);
         }
 
         //6. 发送短信
@@ -126,9 +126,9 @@ public class SMSController {
             redisService.set(MobileSendKey.gap, mobile,mobile);
             redisService.incr(MobileSendKey.counter,mobile);
         }else{
-            return Result.createByError();
+            return Result.error();
         }
-        return Result.createBySuccess();
+        return Result.success();
     }
 
     /**
@@ -147,6 +147,6 @@ public class SMSController {
         if(!CommonUtil.isMobile(mobile)){
             throw new ApiException(ResultCode.ERROR);
         }
-        return Result.createBySuccess();
+        return Result.success();
     }
 }

@@ -40,7 +40,7 @@ public class ApiException extends RuntimeException{
 
     public ApiException(ResultCode resultCode){
         super(resultCode.getMsg());
-        this.code = resultCode.getCode();
+        this.code = resultCode.getStatus();
     }
 
     public String getCode() {

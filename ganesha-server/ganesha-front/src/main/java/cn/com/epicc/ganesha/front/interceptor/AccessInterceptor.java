@@ -48,7 +48,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
             }else if(count < limit){
                 redisService.incr(keyPrefix, keyValue);
             }else{
-                String str  = JSON.toJSONString(Result.createByError(APIErrorCode.OVER_VISIT_ERROR));
+                String str  = JSON.toJSONString(Result.error(APIErrorCode.OVER_VISIT_ERROR));
                 tools.render(response, str);
                 return false;
             }

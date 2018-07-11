@@ -30,6 +30,11 @@ public class Integral {
     private Long balance;
 
     /**
+     * 是否冻结 Y：冻结，N：解锁
+     */
+    private String freeze;
+
+    /**
      * 更新时间
      */
     private Date mTime;

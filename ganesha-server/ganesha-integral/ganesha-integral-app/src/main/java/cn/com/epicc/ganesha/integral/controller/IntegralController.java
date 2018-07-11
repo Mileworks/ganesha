@@ -1,7 +1,13 @@
 package cn.com.epicc.ganesha.integral.controller;
 
+import cn.com.epicc.ganesha.activity.struct.ActivityStruct;
 import cn.com.epicc.ganesha.common.result.Result;
+import cn.com.epicc.ganesha.integral.entity.IntegralType;
+import cn.com.epicc.ganesha.integral.exception.IntegralException;
+import cn.com.epicc.ganesha.integral.exception.constant.IntegralError;
+import cn.com.epicc.ganesha.integral.service.IActivityService;
 import cn.com.epicc.ganesha.integral.service.IIntegralService;
+import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -25,31 +31,44 @@ import org.springframework.web.bind.annotation.RestController;
 public class IntegralController {
 
     @Autowired
-    IIntegralService iIntegralService;
+    private IIntegralService iIntegralService;
 
+    @Autowired
+    private IActivityService iActivityService;
 
     @ApiOperation(value = "增加积分")
     @ApiImplicitParams({
+            @ApiImplicitParam(name = "accessToken", value = "授权ID" , paramType = "form"),
             @ApiImplicitParam(name = "accountId", value = "账户ID" , paramType = "form"),
             @ApiImplicitParam(name = "integral", value = "积分" , paramType = "form")
     })
     @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public Result add(@Param("accountId") String accountId, @Param("integral") Long integral){
+    public Result add(@Param("accessToken")String accessToken, @Param("accountId") String accountId,
+                      @Param("integral") Long integral, @Param("integralType")Integer integralType,
+                      @Param("activityId") String activityId
+    ){
         log.info("add-accountId:{},integral:{}",accountId,integral);
-        boolean isSuccess = iIntegralService.add(accountId,integral);
-        return isSuccess?Result.createBySuccess():Result.createByError();
+        Result<ActivityStruct> activity = iActivityService.getActivity(activityId);
+        log.info(JSON.toJSONString(activity));
+        if(activity == null || !activity.isSuccess()){
+            throw new IntegralException(IntegralError.ACTIVITY_ERROR);
+        }
+        boolean isSuccess = iIntegralService.add(accountId,accountId,integral,
+                IntegralType.convert(integralType),activityId);
+        return isSuccess?Result.success():Result.error();
     }
 
     @ApiOperation(value = "扣减积分")
     @ApiImplicitParams({
+            @ApiImplicitParam(name = "accessToken", value = "授权ID" , paramType = "form"),
             @ApiImplicitParam(name = "accountId", value = "账户ID" , paramType = "form"),
             @ApiImplicitParam(name = "integral", value = "积分" , paramType = "form")
     })
     @RequestMapping(value = "/sub",method = RequestMethod.POST)
-    public Result sub(@Param("accountId")String accountId,@Param("integral")Long integral){
+    public Result sub(@Param("accessToken")String accessToken,@Param("accountId")String accountId,@Param("integral")Long integral){
         log.info("sub-accountId:{},integral:{}",accountId,integral);
         boolean isSuccess = iIntegralService.sub(accountId,integral);
-        return isSuccess?Result.createBySuccess():Result.createByError();
+        return isSuccess?Result.success():Result.error();
     }
 
     @ApiOperation(value = "转移积分")
@@ -62,7 +81,7 @@ public class IntegralController {
     public Result trans(@Param("from")String from,@Param("to")String to,@Param("integral")Long integral){
         log.info("trans-from:{},to:{},balance:{}",from,to,integral);
         boolean isSuccess = iIntegralService.trans(from,to,integral);
-        return isSuccess?Result.createBySuccess():Result.createByError();
+        return isSuccess?Result.success():Result.error();
     }
 
     @ApiOperation(value = "查询账户余额")
@@ -73,7 +92,7 @@ public class IntegralController {
     public Result<Long> getBalance(@Param("accountId") String accountId){
         log.info("getBalance-accountId:{}",accountId);
         long balance = iIntegralService.getBalance(accountId);
-        return Result.createBySuccess(balance);
+        return Result.success(balance);
     }
 
 }

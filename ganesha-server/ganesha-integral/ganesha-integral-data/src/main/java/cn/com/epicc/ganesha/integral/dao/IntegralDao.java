@@ -15,16 +15,16 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface IntegralDao {
 
-    @Update("update `ganesha_integral` a set a.`balance` = #{balance} where a.`account_id` = #{accountId}")
+    @Update("UPDATE `ganesha_integral` a SET a.`balance` = #{balance} WHERE a.`account_id` = #{accountId}")
     int updateBalanceByAccountId(@Param("accountId") String accountId, @Param("balance") Long balance);
 
-    @Update("update `ganesha_integral` a set a.`balance` = a.`balance` + #{integral} where a.`account_id` = #{accountId}")
+    @Update("UPDATE `ganesha_integral` a SET a.`balance` = a.`balance` + #{integral} WHERE a.`account_id` = #{accountId}")
     int addIntegralByAccountId(@Param("accountId") String accountId, @Param("integral") Long integral);
 
-    @Update("update `ganesha_integral` a set a.`balance` = a.`balance` - #{integral} where a.`account_id` = #{accountId} and a.balance >= #{integral}")
+    @Update("UPDATE `ganesha_integral` a SET a.`balance` = a.`balance` - #{integral} WHERE a.`account_id` = #{accountId} AND a.balance >= #{integral}")
     int subIntegralByAccountId(@Param("accountId") String accountId, @Param("integral") Long integral);
 
-    @Select("select a.`balance` from `ganesha_integral` a where a.`account_id` = #{accountId} ")
+    @Select("SELECT a.`balance` FROM `ganesha_integral` a WHERE a.`account_id` = #{accountId} ")
     Long selectBalanceByAccountId(@Param("accountId")String accountId);
 
 }

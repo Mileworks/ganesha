@@ -7,7 +7,7 @@
     <modules>
         <module>ganesha-asset-app</module>
         <module>ganesha-asset-data</module>
-        <module>ganesha-asset-vo</module>
+        <module>ganesha-asset-struct</module>
     </modules>
 
     <parent>

@@ -23,7 +23,7 @@ public class SMSServiceImpl implements SMSService {
     @Override
     public Result send(String mobile, String t) {
         log.info("Send Short Message Mobile:{},Type:{}",mobile,t);
-        return Result.createBySuccess();
+        return Result.success();
     }
 
     /**
@@ -36,6 +36,6 @@ public class SMSServiceImpl implements SMSService {
     @Override
     public Result send(String mobile, String t, String text) {
         log.info("Send Short Message Mobile:{},Type:{},Text:{}",mobile,t,text);
-        return Result.createBySuccess();
+        return Result.success();
     }
 }

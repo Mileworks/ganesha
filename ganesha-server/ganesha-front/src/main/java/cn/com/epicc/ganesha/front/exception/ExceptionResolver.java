@@ -34,7 +34,7 @@ public class ExceptionResolver implements HandlerExceptionResolver {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             if (e instanceof ApiException) {//业务失败的异常，如“账号或密码错误”
                 ApiException exception = (ApiException) e;
-                result = Result.createByError(exception.getCode(),exception.getMessage());
+                result = Result.error(exception.getCode(),exception.getMessage());
                 log.error(
                         handlerMethod.getBean().getClass().getSimpleName()+":"+
                                 handlerMethod.getMethod().getName()+":"+
@@ -44,7 +44,7 @@ public class ExceptionResolver implements HandlerExceptionResolver {
             }
             else if (e instanceof ConstraintViolationException){
                 ConstraintViolationException exception = (ConstraintViolationException)e;
-                result = Result.createByError(exception.getConstraintViolations().iterator().next().getMessage());
+                result = Result.error(exception.getConstraintViolations().iterator().next().getMessage());
                 log.error(
                         handlerMethod.getBean().getClass().getSimpleName()+":"+
                                 handlerMethod.getMethod().getName()+":"+
@@ -61,11 +61,11 @@ public class ExceptionResolver implements HandlerExceptionResolver {
                         e.getMessage()
                 );
                 log.error(message);
-                result = Result.createByError();
+                result = Result.error();
             }
         }
         else{
-            result = Result.createByError();
+            result = Result.error();
         }
         //返回处理结果
         try {
