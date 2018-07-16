@@ -39,6 +39,7 @@ public class IntegralServiceImpl extends IIntegralServiceAbstract {
      * @return 是否成功
      */
     @Override
+    @Transactional
     public boolean add(String operator, String accountId, long amount, IntegralType integralType, String activityId) {
         this.validAccountIdAndIntegralValue(amount,accountId,operator);
         IntegralAddEvent integralAddEvent = IntegralAddEvent

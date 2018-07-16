@@ -3,14 +3,17 @@ package cn.com.epicc.ganesha.activity.controller;
 import cn.com.epicc.ganesha.activity.converter.Generation;
 import cn.com.epicc.ganesha.activity.model.Activity;
 import cn.com.epicc.ganesha.activity.service.IActivityService;
-import cn.com.epicc.ganesha.activity.struct.ActivityStruct;
+import cn.com.epicc.ganesha.activity.struct.*;
 import cn.com.epicc.ganesha.common.date.DateUtil;
 import cn.com.epicc.ganesha.common.result.Result;
+import cn.com.epicc.ganesha.common.util.CommonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Arrays;
 
 /**
  * Description: 活动模块控制层
@@ -44,6 +47,60 @@ public class ActivityController {
             return Result.error();
         }
         return Result.success(Generation.converter(activity));
+    }
+
+    @RequestMapping(value = "/sample",method = RequestMethod.GET)
+    public Packet Sample(){
+        Head head = Head.builder()
+                        .requestType("10001")
+                        .insureType("100")
+                        .from("HuiZe")
+                        .sessionId(CommonUtil.getUUID())
+                        .sendTime(String.valueOf(System.currentTimeMillis()))
+                        .build();
+
+        Inputs inputBase = Inputs.builder().inputs(
+                Arrays.asList(
+                        Input.builder().name("productNo").value("1001").build(),
+                        Input.builder().name("productCode").value("0615").build(),
+                        Input.builder().name("productName").value("旅游险").build(),
+                        Input.builder().name("accessTime").value("127999998").build(),
+                        Input.builder().name("startTime").value("23242342").build(),
+                        Input.builder().name("endTime").value("23423421").build(),
+                        Input.builder().name("agentCode").value("1001").build(),
+                        Input.builder().name("special").value("448_59546").build()
+                )
+        ).type("base").build();
+
+        Inputs inputSpecials = Inputs.builder().inputs(
+                Arrays.asList(
+                        Input.builder().name("appName").value("张帆").build()
+                )
+        ).type("special").build();
+
+        Inputs inputApp = Inputs.builder().inputs(
+                Arrays.asList(
+                        Input.builder().name("appName").value("张帆").build()
+                )
+        ).type("applicant").build();
+
+        Inputs inputTgt = Inputs.builder().inputs(
+                Arrays.asList(
+                        Input.builder().name("travCountry").value("韩国").build()
+                )
+        ).type("tgt").build();
+
+        InputList inputList_1 = InputList.builder().type("request").inputs(
+                Arrays.asList(
+                        inputBase,inputApp,inputTgt
+                )
+        ).build();
+
+        Request request = Request.builder().inputLists(
+                Arrays.asList(inputList_1)
+        ).build();
+
+        return Packet.builder().head(head).request(request).build();
     }
 
 }

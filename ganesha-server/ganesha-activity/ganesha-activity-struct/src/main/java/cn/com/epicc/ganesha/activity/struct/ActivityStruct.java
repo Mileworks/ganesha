@@ -1,5 +1,6 @@
 package cn.com.epicc.ganesha.activity.struct;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,6 +11,8 @@ import lombok.Data;
  */
 @Data
 @Builder
+@SuppressWarnings("deprecation")
+@JsonSerialize(include =  JsonSerialize.Inclusion.NON_NULL)
 public class ActivityStruct {
 
     /**

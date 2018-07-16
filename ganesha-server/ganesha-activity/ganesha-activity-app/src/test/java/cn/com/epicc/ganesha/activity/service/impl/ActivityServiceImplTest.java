@@ -42,5 +42,4 @@ public class ActivityServiceImplTest {
         log.info(JSON.toJSONString(activity));
         Assert.assertNotNull(activity.getId());
     }
-
 }
