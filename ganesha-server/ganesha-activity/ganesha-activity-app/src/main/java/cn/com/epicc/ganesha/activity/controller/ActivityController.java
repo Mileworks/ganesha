@@ -67,16 +67,9 @@ public class ActivityController {
                         Input.builder().name("accessTime").value("127999998").build(),
                         Input.builder().name("startTime").value("23242342").build(),
                         Input.builder().name("endTime").value("23423421").build(),
-                        Input.builder().name("agentCode").value("1001").build(),
-                        Input.builder().name("special").value("448_59546").build()
+                        Input.builder().name("agentCode").value("1001").build()
                 )
         ).type("base").build();
-
-        Inputs inputSpecials = Inputs.builder().inputs(
-                Arrays.asList(
-                        Input.builder().name("appName").value("张帆").build()
-                )
-        ).type("special").build();
 
         Inputs inputApp = Inputs.builder().inputs(
                 Arrays.asList(
@@ -86,7 +79,7 @@ public class ActivityController {
 
         Inputs inputTgt = Inputs.builder().inputs(
                 Arrays.asList(
-                        Input.builder().name("travCountry").value("韩国").build()
+                        Input.builder().name("travelCountry").value("韩国").build()
                 )
         ).type("tgt").build();
 

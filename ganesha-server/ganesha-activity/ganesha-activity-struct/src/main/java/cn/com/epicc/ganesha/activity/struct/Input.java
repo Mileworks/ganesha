@@ -25,6 +25,8 @@ public class Input {
     @JacksonXmlText
     private String value;
 
+
+
     public Input() {
     }
 }

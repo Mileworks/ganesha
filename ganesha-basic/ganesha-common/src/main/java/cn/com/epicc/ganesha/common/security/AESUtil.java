@@ -11,7 +11,6 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Arrays;
 
 
 /**
@@ -80,7 +79,7 @@ public class AESUtil {
             //AES 要求密钥长度为128
             kg.init(128,random);
             SecretKey secretKey = kg.generateKey();
-            log.info("{},{},{}", Arrays.toString(secretKey.getEncoded()),secretKey.getAlgorithm(),secretKey.getFormat());
+            log.info("密钥：{}",Base64.encodeBase64String(secretKey.getEncoded()));
             return new SecretKeySpec(secretKey.getEncoded(),KEY_ALGORITHM);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -89,11 +88,13 @@ public class AESUtil {
     }
 
     public static void main(String[] args) {
-        String key = "!@#$%^&999--";
-        String encrypt = encrypt("白日梦想家、荒野生存、梅里雪山",key);
-        log.info(encrypt);
-        log.info("{}",encrypt.length());
-        String decrypt = decrypt(encrypt,key);
-        log.info(decrypt);
+        for (int i = 0 ; i < 100 ;i++) {
+            String key = "!@#$%^&999--";
+            String encrypt = encrypt("白日梦想家、荒野生存、梅里雪山", key);
+            log.info("密文：{}",encrypt);
+            log.info("{}", encrypt.length());
+            String decrypt = decrypt(encrypt, key);
+            log.info("解密：{}",decrypt);
+        }
     }
 }

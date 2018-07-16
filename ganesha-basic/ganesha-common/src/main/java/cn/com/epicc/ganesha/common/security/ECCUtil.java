@@ -194,7 +194,7 @@ public class ECCUtil {
         return decryptedData;
     }
 
-    private final static int threadCount = 10000;
+    private final static int threadCount = 100;
 
     public static void main(String[] args) throws Exception{
         String message = "白日梦想家、荒野生存、燃情岁月、肖申克的救赎";
